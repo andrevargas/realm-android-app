@@ -10,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import br.univali.sisnet.realmapp.R
 import br.univali.sisnet.realmapp.domain.Board
+import br.univali.sisnet.realmapp.domain.Todo
 import br.univali.sisnet.realmapp.view.adapters.BoardAdapter
+import io.realm.RealmList
 
 class BoardListFragment : Fragment() {
 
@@ -35,7 +37,9 @@ class BoardListFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
 
         adapter = BoardAdapter(listener)
-        adapter!!.boardList = listOf()
+        adapter!!.boardList = listOf(Board(
+            1, "Quadrinho", RealmList<Todo>()
+        ))
 
         rvBoards!!.layoutManager = layoutManager
         rvBoards!!.adapter = adapter

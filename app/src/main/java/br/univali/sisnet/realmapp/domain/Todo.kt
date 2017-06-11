@@ -2,11 +2,12 @@ package br.univali.sisnet.realmapp.domain
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import java.io.Serializable
 import java.util.Date
 
-class Todo(
+open class Todo(
     @PrimaryKey var id: Long = 0,
     var description: String = "",
     var completed: Boolean = false,
-    val createdAt: Date = Date()
-) : RealmObject()
+    var createdAt: Date = Date()
+) : RealmObject(), Serializable

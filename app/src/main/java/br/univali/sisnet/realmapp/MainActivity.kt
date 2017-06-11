@@ -6,7 +6,9 @@ import br.univali.sisnet.realmapp.domain.Board
 import br.univali.sisnet.realmapp.fragments.BoardDetailFragment
 import br.univali.sisnet.realmapp.fragments.BoardListFragment
 
-class MainActivity : AppCompatActivity(), BoardListFragment.OnItemSelectedListener {
+class MainActivity
+    : AppCompatActivity(),
+      BoardListFragment.OnItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity(), BoardListFragment.OnItemSelectedListen
         val boardDetailFragment = BoardDetailFragment()
 
         transaction.replace(R.id.flMain, boardDetailFragment)
+        transaction.addToBackStack(null)
         transaction.commit()
 
     }

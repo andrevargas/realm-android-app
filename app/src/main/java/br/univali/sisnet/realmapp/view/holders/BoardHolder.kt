@@ -1,5 +1,6 @@
 package br.univali.sisnet.realmapp.view.holders
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
@@ -14,15 +15,19 @@ class BoardHolder(
 
     var tvName: TextView? = null
     var tvTodoCount: TextView? = null
+    val context: Context
 
     init {
         tvName = itemView!!.findViewById(R.id.tvName) as TextView?
         tvTodoCount = itemView.findViewById(R.id.tvTodoCount) as TextView?
+        context = itemView.context
     }
 
     fun bindItem(item: Board) {
-        tvName!!.text = item.name
-        tvTodoCount!!.text = item.todos.size.toString()
+        val res = context.resources
+        tvName!!.text = res.getString(R.string.board_title, item.id, item.name)
+        tvTodoCount!!.text = res.getString(R.string.board_todo_count, item.todos.size.toString())
         itemView.setOnClickListener { listener!!.onItemSelected(item) }
+
     }
 }
