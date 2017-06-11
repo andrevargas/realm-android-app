@@ -42,9 +42,10 @@ class BoardListFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
 
         adapter = BoardAdapter(listener)
-        adapter!!.boardList = listOf(Board(
-            1, "Quadrinho", RealmList<Todo>()
-        ))
+        adapter!!.boardList = listOf(
+            Board(1, "Quadrinho", RealmList<Todo>()),
+            Board(2, "Outro quadrinho", RealmList<Todo>())
+        )
 
         rvBoards!!.layoutManager = layoutManager
         rvBoards!!.adapter = adapter

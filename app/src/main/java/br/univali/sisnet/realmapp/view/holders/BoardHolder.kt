@@ -28,6 +28,5 @@ class BoardHolder(
         tvName!!.text = res.getString(R.string.board_title, item.id, item.name)
         tvTodoCount!!.text = res.getString(R.string.board_todo_count, item.todos.size.toString())
         itemView.setOnClickListener { listener!!.onItemSelected(item) }
-
     }
 }
