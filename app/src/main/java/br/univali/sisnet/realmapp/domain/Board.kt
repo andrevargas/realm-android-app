@@ -11,4 +11,4 @@ open class Board(
     var name: String = "",
     var todos: RealmList<Todo> = RealmList(),
     var createdAt: Date = Date()
-) : RealmObject(), Serializable
+) : RealmObject()

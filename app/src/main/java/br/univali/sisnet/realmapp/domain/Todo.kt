@@ -10,4 +10,4 @@ open class Todo(
     var description: String = "",
     var completed: Boolean = false,
     var createdAt: Date = Date()
-) : RealmObject(), Serializable
+) : RealmObject()

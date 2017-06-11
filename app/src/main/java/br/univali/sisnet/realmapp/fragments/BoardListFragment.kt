@@ -2,7 +2,9 @@ package br.univali.sisnet.realmapp.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -17,6 +19,7 @@ import io.realm.RealmList
 class BoardListFragment : Fragment() {
 
     var rvBoards: RecyclerView? = null
+    var fabAddBoard: FloatingActionButton? = null
     var adapter: BoardAdapter? = null
     var listener: OnItemSelectedListener? = null
 
@@ -28,6 +31,8 @@ class BoardListFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rvBoards = view!!.findViewById(R.id.rvBoards) as RecyclerView?
+        fabAddBoard = view.findViewById(R.id.fabAddBoard) as FloatingActionButton?
+        fabAddBoard!!.setOnClickListener(this::onClickAddBoard)
         setupRecyclerView()
     }
 
@@ -43,6 +48,19 @@ class BoardListFragment : Fragment() {
 
         rvBoards!!.layoutManager = layoutManager
         rvBoards!!.adapter = adapter
+
+    }
+
+    private fun onClickAddBoard(view: View) {
+        val inflatedView = activity.layoutInflater.inflate(R.layout.dialog_add_board, null)
+        AlertDialog.Builder(activity)
+            .setView(inflatedView)
+            .setPositiveButton("Adicionar", { _, _ -> saveBoard(inflatedView) })
+            .setNegativeButton("Cancelar", { dialog, _ -> dialog.cancel() })
+            .show()
+    }
+
+    private fun saveBoard(view: View) {
 
     }
 

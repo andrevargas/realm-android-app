@@ -1,6 +1,5 @@
 package br.univali.sisnet.realmapp.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
@@ -28,11 +27,16 @@ class BoardDetailFragment : Fragment() {
     }
 
     private fun onClickAddTodo(view: View) {
+        val inflatedView = activity.layoutInflater.inflate(R.layout.dialog_add_todo, null)
         AlertDialog.Builder(activity)
-            .setView(activity.layoutInflater.inflate(R.layout.dialog_add_todo, null))
-            .setPositiveButton("Adicionar", { dialog, which ->  })
-            .setNegativeButton("Cancelar", { dialog, which ->  })
+            .setView(inflatedView)
+            .setPositiveButton("Adicionar", { _, _ -> saveTodo(view) })
+            .setNegativeButton("Cancelar", { dialog, _ ->  dialog.cancel() })
             .show()
+    }
+
+    private fun saveTodo(view: View) {
+
     }
 
 }
