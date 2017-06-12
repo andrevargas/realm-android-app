@@ -13,19 +13,19 @@ import android.view.ViewGroup
 import android.widget.EditText
 import br.univali.sisnet.realmapp.R
 import br.univali.sisnet.realmapp.domain.Board
-import br.univali.sisnet.realmapp.domain.Todo
 import br.univali.sisnet.realmapp.view.adapters.BoardAdapter
 import io.realm.Realm
-import io.realm.RealmList
-import io.realm.RealmResults
+import br.univali.sisnet.realmapp.*
 
 class BoardListFragment : Fragment() {
 
     var rvBoards: RecyclerView? = null
     var fabAddBoard: FloatingActionButton? = null
+
     var adapter: BoardAdapter? = null
     var listener: OnItemSelectedListener? = null
-    var realm: Realm? = null
+
+    val realm = Realm.getDefaultInstance()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
           savedInstanceState: Bundle?): View? {
@@ -34,11 +34,12 @@ class BoardListFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         rvBoards = view!!.findViewById(R.id.rvBoards) as RecyclerView?
+
         fabAddBoard = view.findViewById(R.id.fabAddBoard) as FloatingActionButton?
         fabAddBoard!!.setOnClickListener(this::onClickAddBoard)
-        Realm.init(view.context)
-        realm = Realm.getDefaultInstance()
+
         setupRecyclerView()
     }
 
@@ -69,17 +70,11 @@ class BoardListFragment : Fragment() {
         val etBoardName = view.findViewById(R.id.etBoardName) as EditText
         val board: Board = Board()
 
-        try {
-            board.id = realm?.where(Board::class.java)!!.max("id").toLong() + 1
-        } catch (ex: ArrayIndexOutOfBoundsException) {
-            board.id = 0
-        }
-
+        board.id = realm.getNextId(board, "id")
         board.name = etBoardName.text.toString()
 
-        realm?.beginTransaction()
-        realm?.copyToRealm(board)
-        realm?.commitTransaction()
+        realm?.executeTransaction { realm -> realm.copyToRealm(board) }
+
     }
 
     override fun onAttach(context: Context?) {

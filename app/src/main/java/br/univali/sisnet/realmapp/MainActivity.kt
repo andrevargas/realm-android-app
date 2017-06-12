@@ -28,6 +28,10 @@ class MainActivity
         val transaction = supportFragmentManager.beginTransaction()
         val boardDetailFragment = BoardDetailFragment()
 
+        val bundle = Bundle();
+        bundle.putLong("board_id", item.id)
+        boardDetailFragment.arguments = bundle
+
         transaction.replace(R.id.flMain, boardDetailFragment)
         transaction.addToBackStack(null)
         transaction.commit()

@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Descrição da tarefa"
-            />
+            android:id="@+id/etTodoDescription" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -27,6 +27,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Concluída?"/>
+            android:text="Concluída?"
+            android:id="@+id/cbTodoCompleted"/>
     </android.support.design.widget.TextInputLayout>
 </LinearLayout>
